@@ -22,7 +22,7 @@ module Ray where
     constructor Ray_⟨_⟩
     field
       n : ℕ
-      <N : (n ℕ.< N)
+      safe : (n ℕ.< N)
 
   Ray-to-ℕ : {N places : ℕ} → (Ray N places) → ℕ
   Ray-to-ℕ Ray n ⟨ _ ⟩ = n
