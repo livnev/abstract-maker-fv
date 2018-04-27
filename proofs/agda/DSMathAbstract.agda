@@ -43,7 +43,7 @@ module Ray where
   rmul : {N places : ℕ} → {t : ¬(N ≡ 0)} → (x : Ray N places) → (y : Ray N places) → ((Ray-to-ℕ x) ℕ.* (Ray-to-ℕ y) ℕ.< N) → (Ray N places)
   rmul {N} {places} {t} (Ray a ⟨ asafe ⟩)  (Ray b ⟨ bsafe ⟩) absafe = Ray ((a ℕ.* b) 10<< places ) ⟨ {!!} ⟩ 
 
-  -- Ray exponentiation, naive algorithm (for warm up)
+  -- Ray exponentiation, by naive algorithm (for warm up)
   rpow-naive : {N places : ℕ} → {t : ¬(N ≡ 0)} → {s : 10 ℕ.^ places ℕ.< N} → (Ray N places) → ℕ → (Ray N places)
   rpow-naive {N} {places} {t} {s} x ℕ.zero = Ray-one {N} {places} s
   rpow-naive {N} {places} {t} {s} x (ℕ.suc n) = rmul {N} {places} {t} x (rpow-naive {N} {places} {t} {s} x n) {!!}
@@ -57,7 +57,7 @@ module Ray where
   rpow-naive-correct-case2 : {N places : ℕ} → {t : N ℕ.> 1} → {s : 10 ℕ.^ places ℕ.< N} → (x : Ray N places) → (n : ℕ) → ((Ray-to-ℕ x) ℕ.< 1) → ∣ (Ray-to-ℕ (rpow-naive {N} {places} {{!!}} {s} x n)) ℕ- ((Ray-to-ℕ x) ℕ.^ n) ∣ ℕ.< ((Ray-to-ℕ (Ray-delta t)) ℕ.* n ℕ.* ((Ray-to-ℕ x) ℕ.^ n))
   rpow-naive-correct-case2 = {!!}
 
-  -- exponentiation by repeated squaring, as seen in ds-math
+  -- Ray exponentiation, by repeated squaring (as seen in ds-math)
   rpow : {N places : ℕ} → {t : ¬(N ≡ 0)} → {s : 10 ℕ.^ places ℕ.< N} → (Ray N places) → ℕ → (Ray N places)
   rpow {N} {places} {t} {s} x ℕ.zero = Ray-one {N} {places} s
   rpow {N} {places} {t} {s} x (ℕ.suc n) = {!!}
